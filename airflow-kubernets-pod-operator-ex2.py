@@ -72,6 +72,7 @@ with models.DAG(
         # to satisfy the computing requirements. Alternatively, launching pods
         # into a custom namespace will stop fighting over resources.
         namespace='default',
+        in_cluster=True,
         # Docker image specified. Defaults to hub.docker.com, but any fully
         # qualified URLs will point to a custom repository. Supports private
         # gcr.io images if the Composer Environment is under the same
