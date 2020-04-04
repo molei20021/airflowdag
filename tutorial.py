@@ -63,7 +63,7 @@ dag = DAG(
 
 # t1, t2 and t3 are examples of tasks created by instantiating operators
 t1 = BashOperator(
-    task_id='print_date',
+    task_id='t1',
     bash_command='date',
     dag=dag,
 )
@@ -79,7 +79,7 @@ rendered in the UI's Task Instance Details page.
 dag.doc_md = __doc__
 
 t2 = BashOperator(
-    task_id='sleep',
+    task_id='t2',
     depends_on_past=False,
     bash_command='sleep 5',
     dag=dag,
@@ -94,7 +94,7 @@ templated_command = """
 """
 
 t3 = BashOperator(
-    task_id='templated',
+    task_id='t3',
     depends_on_past=False,
     bash_command=templated_command,
     params={'my_param': 'Parameter I passed in'},
@@ -108,5 +108,28 @@ t4 = BashOperator(
     dag=dag,
 )
 
+t5 = BashOperator(
+    task_id='t5',
+    depends_on_past=False,
+    bash_command='echo start t5',
+    dag=dag,
+)
+
+t6 = BashOperator(
+    task_id='t6',
+    depends_on_past=False,
+    bash_command='echo start t6',
+    dag=dag,
+)
+
+t7 = BashOperator(
+    task_id='t7',
+    depends_on_past=False,
+    bash_command='echo start t7',
+    dag=dag,
+)
+
 t1 >> [t2, t3]
 t2 >> t4
+t3 >> [t5, t6]
+[t6, t4] >> t7
