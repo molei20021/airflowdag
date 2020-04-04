@@ -101,4 +101,12 @@ t3 = BashOperator(
     dag=dag,
 )
 
+t4 = BashOperator(
+    task_id='t4',
+    depends_on_past=False,
+    bash_command='sleep 10',
+    dag=dag,
+)
+
 t1 >> [t2, t3]
+t2 >> t4
