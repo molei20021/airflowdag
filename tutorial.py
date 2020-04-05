@@ -28,6 +28,10 @@ import airflow
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 
+from airflow import models
+from airflow.contrib.kubernetes import secret
+from airflow.contrib.operators import kubernetes_pod_operator
+
 # These args will get passed on to each operator
 # You can override them on a per-task basis during operator initialization
 default_args = {
@@ -129,7 +133,17 @@ t7 = BashOperator(
     dag=dag,
 )
 
+t8 = kubernetes_pod_operator.KubernetesPodOperator(
+    task_id="t8",
+    name="podtest",
+    cmds=['echo','hello'],
+    namespace='default',
+    in_cluster=True,
+    image='gcr.io/gcp-runtimes/ubuntu_18_0_4',
+)
+
 t1 >> [t2, t3]
 t2 >> t4
 t3 >> [t5, t6]
 [t6, t4] >> t7
+[t5, t7] >> t8
