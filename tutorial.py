@@ -140,6 +140,7 @@ t8 = kubernetes_pod_operator.KubernetesPodOperator(
     namespace='default',
     in_cluster=True,
     image='gcr.io/gcp-runtimes/ubuntu_18_0_4',
+    dag=dag,
 )
 
 t1 >> [t2, t3]
