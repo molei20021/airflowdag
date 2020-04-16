@@ -27,13 +27,13 @@ dag = DAG(
 def start(*args, **kwargs):
     dynamicValue = 1
 
-    variableValue = Variable.get("DynamicWorkflow_Group1")
+    variableValue = 1
     logging.info("Current DynamicWorkflow_Group1 value is " + str(variableValue))
 
     logging.info("Setting the Airflow Variable DynamicWorkflow_Group1 to " + str(dynamicValue))
     os.system('airflow variables --set DynamicWorkflow_Group1 ' + str(dynamicValue))
 
-    variableValue = Variable.get("DynamicWorkflow_Group1")
+    variableValue = 1
     logging.info("Current DynamicWorkflow_Group1 value is " + str(variableValue))
     for i in range(dynamicValue):
         resetTasksStatus('firstGroup_' + str(i))
@@ -57,13 +57,13 @@ def resetTasksStatus(task_id):
 def bridge1(*args, **kwargs):
     dynamicValue = 2
 
-    variableValue = Variable.get("DynamicWorkflow_Group2")
+    variableValue = 2
     logging.info("Current DynamicWorkflow_Group2 value is " + str(variableValue))
 
     logging.info("Setting the Airflow Variable DynamicWorkflow_Group2 to " + str(dynamicValue))
     os.system('airflow variables --set DynamicWorkflow_Group2 ' + str(dynamicValue))
 
-    variableValue = Variable.get("DynamicWorkflow_Group2")
+    variableValue = 2
     logging.info("Current DynamicWorkflow_Group2 value is " + str(variableValue))
     for i in range(dynamicValue):
         resetTasksStatus('secondGroup_' + str(i))
@@ -72,13 +72,13 @@ def bridge1(*args, **kwargs):
 def bridge2(*args, **kwargs):
     dynamicValue = 3
 
-    variableValue = Variable.get("DynamicWorkflow_Group3")
+    variableValue = 3
     logging.info("Current DynamicWorkflow_Group3 value is " + str(variableValue))
 
     logging.info("Setting the Airflow Variable DynamicWorkflow_Group3 to " + str(dynamicValue))
     os.system('airflow variables --set DynamicWorkflow_Group3 ' + str(dynamicValue))
 
-    variableValue = Variable.get("DynamicWorkflow_Group3")
+    variableValue = 3
     logging.info("Current DynamicWorkflow_Group3 value is " + str(variableValue))
     for i in range(dynamicValue):
         resetTasksStatus('thirdGroup_' + str(i))
@@ -102,7 +102,7 @@ bridge1_task = PythonOperator(
     python_callable=bridge1,
     op_args=[])
 
-DynamicWorkflow_Group1 = Variable.get("DynamicWorkflow_Group1")
+DynamicWorkflow_Group1 = 1
 logging.info("The current DynamicWorkflow_Group1 value is " + str(DynamicWorkflow_Group1))
 
 
@@ -129,7 +129,7 @@ bridge2_task = PythonOperator(
     python_callable=bridge2,
     op_args=[])
 
-DynamicWorkflow_Group2 = Variable.get("DynamicWorkflow_Group2")
+DynamicWorkflow_Group2 = 2
 logging.info("The current DynamicWorkflow value is " + str(DynamicWorkflow_Group2))
 
 for index in range(int(DynamicWorkflow_Group2)):
@@ -149,7 +149,7 @@ ending_task = PythonOperator(
     python_callable=end,
     op_args=[])
 
-DynamicWorkflow_Group3 = Variable.get("DynamicWorkflow_Group3")
+DynamicWorkflow_Group3 = 3
 logging.info("The current DynamicWorkflow value is " + str(DynamicWorkflow_Group3))
 
 for index in range(int(DynamicWorkflow_Group3)):
