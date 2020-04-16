@@ -163,7 +163,7 @@ for index in range(int(DynamicWorkflow_Group3)):
     else:
         dynamicTask = BashOperator(
             task_id='thirdGroup_' + str(index),
-            bash_command='touch /home/user/airflow/thirdGroup_' + str(index) + '.txt',
+            bash_command='touch /tmp/thirdGroup_' + str(index) + '.txt',
             dag=dag)
 
     bridge2_task >> dynamicTask
