@@ -34,7 +34,7 @@ total = 5
 
 for index in range(total):
     dynamicTask = PythonOperator(
-        task_id='shape_map_' + index,
+        task_id='shape_map_' + str(index),
         dag=dag,
         provide_context=True,
         python_callable=doShapeMap,
