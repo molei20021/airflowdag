@@ -18,7 +18,7 @@ dag = airflow.DAG(
 def doShapeMap(start, end, *args, **kwargs):
     print("doShapeMap:", start, " to ", end)
 
-def doShapeReduce():
+def doShapeReduce(*args, **kwargs):
     print("doShapeReduce")
 
 do_shape_reduce_task = PythonOperator(
