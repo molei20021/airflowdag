@@ -29,15 +29,28 @@ do_shape_reduce_task = PythonOperator(
     op_args=[],
 )
 
+def doTwoThree(start, end, *args, **kwargs):
+    print("doTwoThree:", start, " to ", end)
+
+
 total = 5
 
 
 for index in range(total):
-    dynamicTask = PythonOperator(
+    dynamicShapeMapTask = PythonOperator(
         task_id='shape_map_' + str(index),
         dag=dag,
         provide_context=True,
         python_callable=doShapeMap,
         op_args=[index, index],
     )
-    dynamicTask >> do_shape_reduce_task
+
+    dynamicTwoThree_task = PythonOperator(
+        task_id='two_three_' + str(index),
+        dag=dag,
+        provide_context=True,
+        python_callable=doTwoThree,
+        op_args=[index, index],
+    )
+
+    dynamicShapeMapTask >> do_shape_reduce_task >> dynamicTwoThree_task
