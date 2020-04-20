@@ -29,7 +29,7 @@ def dateEnd(ds, **kwargs):
 
 def dateStart(ds, **kwargs):
     r = requests.get('https://api.github.com/events')
-    print(r)
+    print(r.content)
     return kwargs['dag_run'].conf['date_start']
 
 
