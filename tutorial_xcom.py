@@ -6,6 +6,7 @@ from airflow.hooks.jdbc_hook import JdbcHook
 from airflow.operators.python_operator import PythonOperator
 from airflow.operators.bash_operator import BashOperator
 import requests
+from airflow.models import Variable
 
 default_args = {
     'owner': 'airflow',
@@ -28,7 +29,7 @@ def dateEnd(ds, **kwargs):
 
 
 def dateStart(ds, **kwargs):
-    r = requests.get('https://api.github.com/events')
+    r = requests.get(Variable.get("http_url_test"))
     print(r.content)
     return kwargs['dag_run'].conf['date_start']
 
