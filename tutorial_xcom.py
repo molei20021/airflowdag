@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 from airflow.hooks.jdbc_hook import JdbcHook
 from airflow.operators.python_operator import PythonOperator
 from airflow.operators.bash_operator import BashOperator
+import requests
 
 default_args = {
     'owner': 'airflow',
@@ -27,6 +28,8 @@ def dateEnd(ds, **kwargs):
 
 
 def dateStart(ds, **kwargs):
+    r = requests.get('https://api.github.com/events')
+    print(r)
     return kwargs['dag_run'].conf['date_start']
 
 
