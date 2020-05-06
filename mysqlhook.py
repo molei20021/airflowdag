@@ -24,6 +24,8 @@ def doTestMysqlHook(*args, **kwargs):
     sql = "select max(id) as max_id from manzeng_predict_src_table"
     result = sql_hook.get_records(sql)
     print('maxid:' + str(result[0][0]))
+    result = sql_hook.get_first(sql)
+    print('maxid:' + str(result[0]))
 
 doMysqlTask = PythonOperator(
     task_id='testmysqlhook',
