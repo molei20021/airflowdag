@@ -23,7 +23,7 @@ def doTestMysqlHook(*args, **kwargs):
         print(row)
     sql = "select max(id) as max_id from manzeng_predict_src_table"
     result = sql_hook.get_records(sql)
-    print(result[0])
+    print(result[0]['max_id'])
 
 doMysqlTask = PythonOperator(
     task_id='testmysqlhook',
