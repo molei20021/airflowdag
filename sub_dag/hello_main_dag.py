@@ -4,6 +4,9 @@ from airflow.operators.bash_operator import BashOperator
 from airflow.operators.python_operator import PythonOperator
 from airflow.operators.subdag_operator import SubDagOperator
 from datetime import datetime, timedelta
+import sys,os
+curPath = os.path.abspath(os.path.dirname(__file__))
+sys.path.append(curPath)
 from hello_sub_dag import my_sub_dag
 
 # Step 1 - define the default parameters for the DAG
