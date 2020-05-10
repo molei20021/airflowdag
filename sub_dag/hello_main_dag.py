@@ -24,7 +24,7 @@ default_args = {
 
 # Step 2 - Create a DAG object
 dag = DAG(dag_id='hello_main_dag',
-        schedule_interval='0 0 * * *' ,
+        schedule_interval="@once" ,
         default_args=default_args
     )
 
