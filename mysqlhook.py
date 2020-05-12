@@ -16,6 +16,9 @@ dag = airflow.DAG(
     default_args=args,
 )
 
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+
 def doTestMysqlHook(*args, **kwargs):
     sql_hook = MySqlHook().get_hook(conn_id="mysql_operator_test_connid")
     sql = "select * from manzeng_predict_src_table;"
@@ -27,9 +30,9 @@ def doTestMysqlHook(*args, **kwargs):
     print('maxid:' + str(result[0][0]))
     result = sql_hook.get_first(sql)
     print('maxid:' + str(result[0]))
-    logging.error('log test err')
-    logging.warn('log test warn')
-    logging.info('log test info')
+    logger.error('log test err')
+    logger.warn('log test warn')
+    logger.info('log test info')
     sql_hook.run("""insert into manzeng_result_v3(consignor_phone,prediction) values('122','33')""")
 
 doMysqlTask = PythonOperator(
