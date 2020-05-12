@@ -17,7 +17,7 @@ dag = airflow.DAG(
     default_args=args,
 )
 
-log = StreamLogWriter(logger=logging, level=logging.ERROR)
+log = LoggingMixin().log
 
 
 def doTestMysqlHook(*args, **kwargs):
@@ -31,8 +31,7 @@ def doTestMysqlHook(*args, **kwargs):
     print('maxid:' + str(result[0][0]))
     result = sql_hook.get_first(sql)
     print('maxid:' + str(result[0]))
-    log.write("err log test")
-    log.flush()
+    log.error("err test log")
     sql_hook.run("""insert into manzeng_result_v3(consignor_phone,prediction) values('122','33')""")
 
 doMysqlTask = PythonOperator(
