@@ -17,7 +17,7 @@ dag = airflow.DAG(
 )
 
 logger = logging.getLogger()
-logger.setLevel(logging.INFO)
+logger.setLevel(logging.ERROR)
 
 def doTestMysqlHook(*args, **kwargs):
     sql_hook = MySqlHook().get_hook(conn_id="mysql_operator_test_connid")
