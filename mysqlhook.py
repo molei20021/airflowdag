@@ -32,6 +32,7 @@ def doTestMysqlHook(*args, **kwargs):
     result = sql_hook.get_first(sql)
     print('maxid:' + str(result[0]))
     log.write("err log test")
+    log.flush()
     sql_hook.run("""insert into manzeng_result_v3(consignor_phone,prediction) values('122','33')""")
 
 doMysqlTask = PythonOperator(
