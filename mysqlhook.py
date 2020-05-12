@@ -27,7 +27,7 @@ def doTestMysqlHook(*args, **kwargs):
     result = sql_hook.get_first(sql)
     print('maxid:' + str(result[0]))
 
-    sql_hook.run("""insert overwrite table manzeng_result_v3(consignor_phone,prediction) values('122','33')""")
+    sql_hook.run("""insert into table manzeng_result_v3(consignor_phone,prediction) values('122','33')""")
 
 doMysqlTask = PythonOperator(
     task_id='testmysqlhook',
