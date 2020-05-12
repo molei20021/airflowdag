@@ -2,6 +2,7 @@ import airflow
 from airflow.operators.python_operator import PythonOperator
 from airflow.hooks.mysql_hook import MySqlHook
 import logging
+import os
 
 main_dag_id = 'mysqlhook'
 args = {
@@ -16,8 +17,10 @@ dag = airflow.DAG(
     default_args=args,
 )
 
+os.environ['AIRFLOW__CORE__LOGGING_LEVEL'] = 'INFO'
+
 logger = logging.getLogger()
-logger.setLevel(logging.ERROR)
+logger.setLevel(logging.INFO)
 
 def doTestMysqlHook(*args, **kwargs):
     sql_hook = MySqlHook().get_hook(conn_id="mysql_operator_test_connid")
