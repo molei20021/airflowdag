@@ -25,6 +25,9 @@ def doShapeMap(start, end, *args, **kwargs):
 def doShapeReduce(*args, **kwargs):
     print("doShapeReduce")
     print(currtime)
+    fw = open('/tmp/shapetest.txt', 'w')
+    fw.write(currtime)
+    fw.close()
 
 doShapeReduceTask = PythonOperator(
     task_id='shape_reduce',
@@ -35,12 +38,18 @@ doShapeReduceTask = PythonOperator(
 )
 
 def doTwoThree(start, end, *args, **kwargs):
+    currtime_tmp = ''
+    with open('/tmp/shapetest.txt', 'r') as fr:
+        currtime_tmp = fr.read()
     print("doTwoThree:", start, " to ", end)
-    print(currtime)
+    print(currtime_tmp)
 
 
 def doTwoThreeReduce(*args, **kwargs):
-    print("doTwoThreeReduce:%s" % currtime)
+    currtime_tmp = ''
+    with open('/tmp/shapetest.txt', 'r') as fr:
+        currtime_tmp = fr.read()
+    print("doTwoThreeReduce:%s" % currtime_tmp)
 
 doTwoThreeReduceTask = PythonOperator(
     task_id='two_three_reduce',
