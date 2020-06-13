@@ -2,6 +2,7 @@ import airflow
 from airflow.operators.python_operator import PythonOperator
 from airflow.operators.http_operator import SimpleHttpOperator
 import time
+import os
 
 BdpHttpConn = 'bdp_conn'
 BdpHttpConnTriggerJobEndPoint = 'schedule-control/task/triggerJob'
@@ -27,6 +28,8 @@ def save_curr_time():
     fw.write(currtime)
     fw.close()
 def get_curr_time_from_file():
+    if False == os.path.exists('/tmp/shapetest.txt'):
+        save_curr_time()
     with open('/tmp/shapetest.txt', 'r') as fr:
         currtime_tmp = fr.read()
     return currtime_tmp
