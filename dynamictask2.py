@@ -1,5 +1,6 @@
 import airflow
 from airflow.operators.python_operator import PythonOperator
+import time
 
 main_dag_id = 'DynamicTask2'
 
@@ -15,11 +16,15 @@ dag = airflow.DAG(
     default_args=args,
 )
 
+currtime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+
 def doShapeMap(start, end, *args, **kwargs):
     print("doShapeMap:", start, " to ", end)
+    print(currtime)
 
 def doShapeReduce(*args, **kwargs):
     print("doShapeReduce")
+    print(currtime)
 
 doShapeReduceTask = PythonOperator(
     task_id='shape_reduce',
@@ -31,10 +36,11 @@ doShapeReduceTask = PythonOperator(
 
 def doTwoThree(start, end, *args, **kwargs):
     print("doTwoThree:", start, " to ", end)
+    print(currtime)
 
 
 def doTwoThreeReduce(*args, **kwargs):
-    print("doTwoThreeReduce")
+    print("doTwoThreeReduce:%s" % currtime)
 
 doTwoThreeReduceTask = PythonOperator(
     task_id='two_three_reduce',
