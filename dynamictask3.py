@@ -12,7 +12,7 @@ args = {
 
 dag = airflow.DAG(
     main_dag_id,
-    schedule_interval='0 20 15 * *',
+    schedule_interval='0 18 20 * *',
     default_args=args,
 )
 
