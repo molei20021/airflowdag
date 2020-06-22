@@ -6,13 +6,13 @@ main_dag_id = 'DynamicTask3'
 
 args = {
     'owner': 'airflow',
-    'start_date': airflow.utils.dates.days_ago(90),
+    'start_date': airflow.utils.dates.days_ago(1),
     'provide_context': True,
 }
 
 dag = airflow.DAG(
     main_dag_id,
-    schedule_interval='0 11 22 * *',
+    schedule_interval='40 11 22 * *',
     default_args=args,
 )
 
