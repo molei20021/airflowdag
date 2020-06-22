@@ -11,7 +11,7 @@ main_dag_id = 'DynamicTask2'
 
 args = {
     'owner': 'airflow',
-    'start_date': airflow.utils.dates.days_ago(2),
+    'start_date': airflow.utils.dates.days_ago(60),
     'provide_context': True,
 }
 
