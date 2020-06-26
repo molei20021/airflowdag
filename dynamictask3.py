@@ -5,7 +5,7 @@ from airflow.operators.bash_operator import BashOperator
 main_dag_id = 'DynamicTask3'
 
 args = {
-    'owner': 'airflow',
+    'owner': 'normaluser',
     'start_date': airflow.utils.dates.days_ago(1),
     'provide_context': True,
 }
